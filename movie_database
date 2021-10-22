@@ -1,0 +1,74 @@
+import os
+#Programming Assignment 5a
+#Database of movies
+#This program i will be creating a database of my favorite movies and have different scores for them
+
+def add_faves(movie):
+    '''
+    The add_faves funtion asks for the movie title and the corresponding scores the user would rate the
+    movies on. It takes the movie title and their scores and creates a dictionary from them.
+    '''
+    fave = open('faves.text', 'w')
+
+    while True:
+        print()
+        scores = []
+        title = input('Enter movie title [return to end]: ')
+        movie = {}
+
+        if(title == ''):
+            break
+        
+        #Obtaining the scores
+        visual = input('Visuals [hi/med/lo]:')
+        prod_design = input('Production Design [hi/med/lo]: ')
+        music = input('Music [hi/med/lo]: ')
+        sound_design = input('Sound Design [hi/med/lo]: ')
+        story = input('Story [hi/med/lo]: ')
+        characters = input('Characters [hi/med/lo]: ')
+        genre = input('Genre [hi/med/lo]: ')
+        
+        #Appending each score to the list score
+        scores.append(visual[0].lower())
+        scores.append(prod_design[0].lower())
+        scores.append(music[0].lower())
+        scores.append(sound_design[0].lower())
+        scores.append(story[0].lower())
+        scores.append(characters[0].lower())
+        scores.append(genre[0].lower())
+
+        title = title.lower().strip()
+        movie = dict(zip(title,scores))
+        print(movie)
+        
+        database = str(movie)
+       
+    fave.write(database)
+    fave.close()
+
+    return movie
+        
+       
+
+def main():
+    
+    database = input('Do you already have a faves.text file [y/n]? ')
+    database = database.lower().strip()
+
+    if database == 'n':
+        movie = {}
+        add_faves(movie)
+        
+    elif database == 'y':
+        fave = open('faves.text', 'r').read()
+        movie = eval(fave)
+        add_faves(movie)
+    else:
+        print('Problem with answer. Please try again.')
+'''
+
+The main funtion checks to see whether or not the user already has created a database, if not then it creates
+one for them, if yes then it opens the file where the database is.
+
+'''
+main()
