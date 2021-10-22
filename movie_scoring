@@ -1,0 +1,48 @@
+import os
+
+def score_faves(list_scores):
+    '''
+    This function takes the score that you gave in the previous program and adds those scores to a variable
+    total score. the sum of the score is the total score.
+    '''
+    total_score = 0
+
+    #Checks the score and adds to total_score
+    for score in list_score:
+        if score == 'h':
+            total_score += 5
+            
+        elif score == 'm':
+            total_score += 3
+
+        elif score == 'l':
+            total_score += 1
+
+        else:
+            return print('Incalculable')
+        
+    return total_score
+
+def main():
+    '''
+    The main function opens and reads the text file and uses a condiotial to check if the title is in the data base
+    then prints the total score obtained from score_faves
+    '''
+    
+    #Opening the file with the movie title and list of scores 
+    faves = open('faves.text', 'r').read()
+    movie = eval(faves)
+    
+    title_movie = input('Enter title you want to score: ')
+    title_movie = title_movie.lower().strip()
+    print(movie)
+    
+    #Checking to see if title in the dictionary movie
+    if title_movie in movie:
+       score = score_faves(movie[title_movie])
+       print('Your score for {} is {}.'.format(title_movie.title(), score))
+       
+    else:
+        print('Movie/Video game not in database [or typo in name] ')
+
+main()
